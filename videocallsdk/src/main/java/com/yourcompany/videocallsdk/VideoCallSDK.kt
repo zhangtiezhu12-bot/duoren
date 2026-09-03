@@ -172,10 +172,11 @@ class VideoCallSDK(
                     }
 
                     is RoomEvent.TrackSubscribed -> {
-                        if (event.track is VideoTrack) {
+                        val track = event.track
+                        if (track is VideoTrack) {
                             val info = toInfo(event.participant)
                             participants[info.identity] = info
-                            videoTracks[info.identity] = event.track
+                            videoTracks[info.identity] = track
                             listener?.onVideoAvailable(info)
                         }
                     }
